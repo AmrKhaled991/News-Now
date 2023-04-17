@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:news/categrey/categries.dart';
 import 'package:news/theming.dart';
 
 class Mydrawer extends StatelessWidget {
-
-
+  static int setting=1;
+  static int categ=2;
+  Function drwaerfunction;
+  Mydrawer({required this.drwaerfunction});
   @override
   Widget build(BuildContext context) {
     var mediaq=MediaQuery.of(context).size;
     return Column(crossAxisAlignment: CrossAxisAlignment.stretch,
-
       children: [
         Container(
           color: appthem.primarygreencolor,
@@ -26,7 +26,7 @@ class Mydrawer extends StatelessWidget {
             children: [
               InkWell(
                 onTap: (){
-                  Categries();
+                  drwaerfunction(categ);
                 },
                 child: Row(
                   children: [
@@ -38,7 +38,7 @@ class Mydrawer extends StatelessWidget {
               SizedBox(height: 20),
               InkWell(
                 onTap: (){
-
+                  drwaerfunction(setting);
                 },
                 child: Row(
                   children: [

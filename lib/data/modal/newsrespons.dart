@@ -1,4 +1,7 @@
-import 'package:news/modal/SourceResponce.dart';
+
+
+import 'package:news/data/modal/SourceResponce.dart';
+import 'package:news/domain/domain_model/News.dart';
 
 /// status : "ok"
 /// totalResults : 13318
@@ -7,7 +10,7 @@ import 'package:news/modal/SourceResponce.dart';
 class Newsrespons {
   String? status;
   int? totalResults;
-  List<News>? articles;
+  List<NewsOTP>? articles;
   String? code;
   String? massege;
 
@@ -21,18 +24,16 @@ class Newsrespons {
 
   Newsrespons.fromJson(dynamic json) {
     status = json['status'];
-    status = json['code'];
-    status = json['message'];
-
+    code = json['code'];
+    massege = json['message'];
     totalResults = json['totalResults'];
     if (json['articles'] != null) {
       articles = [];
       json['articles'].forEach((v) {
-        articles?.add(News.fromJson(v));
+        articles?.add(NewsOTP.fromJson(v));
       });
     }
   }
- 
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -55,8 +56,8 @@ class Newsrespons {
 /// publishedAt : "2022-12-04T15:53:19Z"
 /// content : "A version of this story first appeared in CNN Business Before the Bell newsletter. Not a subscriber? You can sign up right here.\r\nThe meltdown of FTX has sent the price of bitcoin and other cryptocur… [+5753 chars]"
 
-class News {
-  Source? source;
+class NewsOTP {
+  SourceOTP? source;
   String? author;
   String? title;
   String? description;
@@ -65,7 +66,7 @@ class News {
   String? publishedAt;
   String? content;
 
-  News({
+  NewsOTP({
       this.source, 
       this.author, 
       this.title, 
@@ -75,8 +76,8 @@ class News {
       this.publishedAt, 
       this.content,});
 
-  News.fromJson(dynamic json) {
-    source = json['source'] != null ? Source.fromJson(json['source']) : null;
+  NewsOTP.fromJson(dynamic json) {
+    source = json['source'] != null ? SourceOTP.fromJson(json['source']) : null;
     author = json['author'];
     title = json['title'];
     description = json['description'];
@@ -99,6 +100,12 @@ class News {
     map['publishedAt'] = publishedAt;
     map['content'] = content;
     return map;
+  }
+  News switchotp(){
+    return News(source:source!.switchotp() ,
+      url: url,description: description,title:title ,author:author ,content: content,publishedAt: publishedAt,
+      urlToImage: urlToImage
+    );
   }
 
 }

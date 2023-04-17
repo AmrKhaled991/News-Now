@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:news/categrey/newscontainer.dart';
-import 'package:news/categrey/tabitma.dart';
-import 'package:news/modal/SourceResponce.dart';
+import 'package:news/domain/domain_model/Category.dart';
+import 'package:news/presention/categrey/tabitma.dart';
+import 'package:news/data/modal/SourceResponce.dart';
+
+import '../news/newscontainer.dart';
 
 class contanTab extends StatefulWidget {
 List<Source> sourcelist;
@@ -31,7 +33,7 @@ int selctedindex=0;
           tabs: widget.sourcelist.map((source) =>
               TabItam(source: source, isslected:selctedindex==widget.sourcelist.indexOf(source) )).toList(),
     ),
-          Expanded(child:  NewsCoon(source: widget.sourcelist[selctedindex]))
+          Expanded(child: NewsCoon(source: widget.sourcelist[selctedindex]))
           ,
         ],
       ),
